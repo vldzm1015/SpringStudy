@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+
+<!-- 빈(객체) 생성 
+ [1] 기본형 프라퍼티 (값) 지정  : value
+   1. setter(property)  2. constructor(constructor-arg)
+-->
+
+<!-- (1) setter -->
+<bean id="mem" class="ex1_xml2_ref.MemberBean">
+	<property name="name"><value>홍길자</value> </property>
+	<property name="age" value="22"/>
+	<property name="message" value="오늘도 행복합시다"/>
+</bean>
+
+
+<!-- (2) constructor -->
+<bean id="mem2" class="ex1_xml2_ref.MemberBean">
+ 	<constructor-arg value="홍길국"></constructor-arg>
+ 	<constructor-arg value="33"></constructor-arg>
+ 	<constructor-arg value="오늘은 불금!!"></constructor-arg>
+</bean>
+
+
+<!-- [2] 참조형 프라퍼티(변수) 지정 : ref -->
+
+<!-- 멤버지정 (1) setter -->
+<bean id="dao" class="ex1_xml2_ref.MemberDao">
+	<property name="member" ref="mem"/>
+</bean>
+
+
+<!-- 멤버지정 (2) constructor -->
+<bean id="dao2" class="ex1_xml2_ref.MemberDao">
+	<constructor-arg name="member" ref="mem2"/>
+</bean>
+</beans>
