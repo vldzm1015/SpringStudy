@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<beans xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.3.xsd" xmlns:aop="http://www.springframework.org/schema/aop" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.springframework.org/schema/beans">
+
+<!-- target 빈 객체 생성 -->
+
+
+<bean class="aop2_xml.order.MemberBeanImpl" id="targetBean"/>
+
+<!--advice 객체 생성 -->
+
+
+<bean class="aop2_xml.order.LoginAdvice" id="advice"/>
+
+<bean class="aop2_xml.order.LoginSample" id="advice2"/>
+
+<!-- aop 설정 -->
+
+
+
+<aop:config>
+
+<aop:pointcut id="pointCut" expression="execution(public * *(..))"/>
+
+
+<aop:aspect id="aspect" order="2" ref="advice">
+
+<aop:around pointcut-ref="pointCut" method="around"/>
+
+</aop:aspect>
+
+
+<aop:aspect id="aspect2" order="1" ref="advice2">
+
+<aop:before pointcut-ref="pointCut" method="before"/>
+
+<aop:after-returning pointcut-ref="pointCut" method="afterReturn"/>
+
+</aop:aspect>
+
+</aop:config>
+
+</beans>
